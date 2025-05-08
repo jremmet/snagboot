@@ -72,7 +72,8 @@ sdps_socs = [
 "imx815",
 "imx865",
 "imx91",
-"imx93"
+"imx93",
+"imx95",
 ]
 
 # SoCs that use raw bulk endpoints rather than HID
@@ -138,7 +139,7 @@ def main():
 	if soc_model in sdps_socs:
 		run_firmware(sdp_cmd, "flash-bin", "spl-sdps")
 		# On some SoCs (e.g.: i.MX8QM) we can have a second stage based on SPDV
-		if soc_model not in ["imx8qm", "imx8qxp"]:
+		if soc_model not in ["imx8qm", "imx8qxp", "imx95"]:
 			return None
 	elif "u-boot-with-dcd" in recovery_config["firmware"]:
 		run_firmware(sdp_cmd, "u-boot-with-dcd")
@@ -168,7 +169,7 @@ def main():
 	sdp_cmd = SDPCommand(HIDDevice(usb_dev))
 	# MX8 boot images are more complicated to generate so we allow everything to be
 	# packaged in a single blob
-	if "imx8" in soc_model:
+	if "imx8" in soc_model or soc_model == "imx95":
 		if not dev_uses_sdpv(usb_dev):
 			raise Exception("Error: The installed SPL version does not support autofinding U-Boot")
 		run_firmware(sdp_cmd, "flash-bin", "u-boot")

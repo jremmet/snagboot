@@ -70,7 +70,7 @@ def get_container_size(boot_blob: bytes) -> int:
 		return len(boot_blob)
 
 	cont_index = 1
-	romimg_offset = CONTAINER_HDR_ALIGNMENT + ROM_BOOTIMG_STRUCT_SIZE
+	romimg_offset = CONTAINER_HDR_ALIGNMENT + ROM_CONTAINER_STRUCT_SIZE
 	romimg_flags = int.from_bytes(boot_blob[romimg_offset + 24:romimg_offset + 28], "little")
 	if romimg_flags & 0x0F == V2X_BOOTIMG_FLAG:
 		# skip V2X container

@@ -43,6 +43,8 @@ tested:
         family: imx
   imx93:
         family: imx
+  imx95:
+        family: imx
   r8:
         family: sunxi
   sama5d2:
